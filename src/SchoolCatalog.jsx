@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 export default function SchoolCatalog() {
   const [courses, setCourses] = useState([]);
   const [search, setSearch] = useState("");
+  const [sortOrder, setSortOrder] = useState({ key: '', direction: ''});
 
   useEffect(() => {
     fetch('/api/courses.json')
@@ -15,13 +16,36 @@ export default function SchoolCatalog() {
     setSearch(event.target.value);
   };
 
-  // Filter
-  const filterCourses = courses.filter((course) => {
-    return (
-      course.courseName.toLowerCase().includes(search.toLowerCase()) ||
-      course.courseNumber.toLowerCase(). includes(search.toLowerCase())
-    );
+  // Sort
+  const sortCourse = [...courses].sort((a, b) => {
+    if (sortOrder.key) {
+      const sortA = a[sortOrder.key].toString();
+      const sortB = b[sortOrder.key].toString();
+      if (sortA < sortB) {
+        return (sortOrder.direction === 'ascending' ? -1 : 1);
+      } else {
+        return (sortOrder.direction === 'ascending' ? 1 : -1);
+      }
+    }
+    return (0);
   });
+
+    // Filter
+    const filterCourses = sortCourse.filter((course) => {
+      return (
+        course.courseName.toLowerCase().includes(search.toLowerCase()) ||
+        course.courseNumber.toLowerCase(). includes(search.toLowerCase())
+      );
+    });
+
+  // Handle Sort
+  const handleSort = (key) => {
+    let direction = 'ascending';
+    if (sortOrder.key === key && sortOrder.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortOrder({ key, direction });
+  };
 
   return (
     <div className="school-catalog">
@@ -30,11 +54,11 @@ export default function SchoolCatalog() {
       <table>
         <thead>
           <tr>
-            <th>Trimester</th>
-            <th>Course Number</th>
-            <th>Courses Name</th>
-            <th>Semester Credits</th>
-            <th>Total Clock Hours</th>
+            <th onClick={() => handleSort('trimester')}>Trimester</th>
+            <th onClick={() => handleSort('courseNumber')}>Course Number</th>
+            <th onClick={() => handleSort('courseName')}>Courses Name</th>
+            <th onClick={() => handleSort('semesterCredits')}>Semester Credits</th>
+            <th onClick={() => handleSort('totalClockHours')}>Total Clock Hours</th>
             <th>Enroll</th>
           </tr>
         </thead>
