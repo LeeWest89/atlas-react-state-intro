@@ -1,4 +1,7 @@
+import { userEnrolledCourses } from "./EnrolledCourses";
+
 export default function ClassSchedule() {
+  const { enrolledCourses, dropCourse } = userEnrolledCourses();
   return (
     <div className="class-schedule">
       <h1>Class Schedule</h1>
@@ -11,13 +14,15 @@ export default function ClassSchedule() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>OS1000</td>
-            <td>Fundamentals of Open Source Operating Systems</td>
-            <td>
-              <button>Drop</button>
-            </td>
-          </tr>
+          {(enrolledCourses.map((course, index) =>(
+            <tr key={index}>
+              <td>{course.courseNumber}</td>
+              <td>{course.courseName}</td>
+              <td>
+                <button onClick={() => dropCourse(course.courseNumber)}>Drop</button>
+              </td>
+            </tr>
+          )))}
         </tbody>
       </table>
     </div>
