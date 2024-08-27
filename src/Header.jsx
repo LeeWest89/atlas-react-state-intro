@@ -1,8 +1,8 @@
 import logo from "./assets/logo.png";
-import { userEnrolledCourses } from "./EnrolledCourses";
+import { useCourses } from "./EnrolledCourses";
 
 export default function Header() {
-  const { enrolledCourses} = userEnrolledCourses();
+  const { enrolledCourses} = useCourses();
   return (
     <div className="header">
       <img src={logo} alt="logo" className="logo" />

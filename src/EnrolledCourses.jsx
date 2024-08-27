@@ -19,4 +19,4 @@ export const EnrolledCourses = ({ children }) => {
   );
 };
 
-export const userEnrolledCourses = () => useContext(CourseContext);
+export const useCourses = () => useContext(CourseContext);

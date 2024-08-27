@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { userEnrolledCourses } from './EnrolledCourses';
+import { useCourses } from './EnrolledCourses';
 
 export default function SchoolCatalog() {
   const [courses, setCourses] = useState([]);
@@ -7,7 +7,7 @@ export default function SchoolCatalog() {
   const [sortOrder, setSortOrder] = useState({ key: '', direction: ''});
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 5;
-  const { enrolledCourse} = userEnrolledCourses();
+  const { enrolledCourse} = useCourses();
 
   useEffect(() => {
     fetch('/api/courses.json')

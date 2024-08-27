@@ -1,7 +1,7 @@
-import { userEnrolledCourses } from "./EnrolledCourses";
+import { useCourses } from "./EnrolledCourses";
 
 export default function ClassSchedule() {
-  const { enrolledCourses, dropCourse } = userEnrolledCourses();
+  const { enrolledCourses, dropCourse } = useCourses();
   return (
     <div className="class-schedule">
       <h1>Class Schedule</h1>
