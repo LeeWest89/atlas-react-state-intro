@@ -64,11 +64,11 @@ export default function SchoolCatalog() {
       <table>
         <thead>
           <tr>
-            <th onClick={() => handleSort('trimester')}>Trimester</th>
-            <th onClick={() => handleSort('courseNumber')}>Course Number</th>
-            <th onClick={() => handleSort('courseName')}>Courses Name</th>
-            <th onClick={() => handleSort('semesterCredits')}>Semester Credits</th>
-            <th onClick={() => handleSort('totalClockHours')}>Total Clock Hours</th>
+            <th className={sortOrder.key === 'trimester' ? 'selected' : ''} onClick={() => handleSort('trimester')}>Trimester</th>
+            <th className={sortOrder.key === 'courseNumber' ? 'selected' : ''} onClick={() => handleSort('courseNumber')}>Course Number</th>
+            <th className={sortOrder.key === 'courseName' ? 'selected' : ''} onClick={() => handleSort('courseName')}>Courses Name</th>
+            <th className={sortOrder.key === 'semesterCredits' ? 'selected' : ''} onClick={() => handleSort('semesterCredits')}>Semester Credits</th>
+            <th className={sortOrder.key === 'totalClockHours' ? 'selected' : ''} onClick={() => handleSort('totalClockHours')}>Total Clock Hours</th>
             <th>Enroll</th>
           </tr>
         </thead>
